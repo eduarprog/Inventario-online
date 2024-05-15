@@ -1,0 +1,32 @@
+
+/* Estilos CSS básicos */
+
+/* Estilos para el cuerpo de la página */
+body {
+    font-family: 'Crimson Pro', serif;
+    margin: 0;
+    padding: 0;
+    background-color: #D6DBDF;
+    height: 70vh; /* Establece el cuerpo de la página al 100% de la altura de la ventana */
+    display: flex; /* Usa flexbox para alinear el contenido */
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+}
+
+/* Estilos para el contenedor */
+.container {
+    text-align: center; /* Centra el contenido dentro del contenedor */
+}
+
+/* Estilos para el contenido */
+.content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+
+
+
