@@ -2,27 +2,61 @@
 require 'conection.php';
 $conection = conection();
 
+$id = "";
 $nombre = "";
 $descripcion = "";
 $cantidad_disponible = "";
 $precio_unitario = "";
 $fecha_adquisicion = "";
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+if ($_SERVER['REQUEST_METHOD'] == 'GET'){
+
+   if (!isset($_GET["id"])){
+    header("location: home.php");
+    exit;
+   }
+
+   $id = $_GET["id"];
+
+   $sql = "SELECT * FROM productos WHERE id=$id";
+   $result = $conection->query($sql);
+   $row = $result->fetch_assoc();
+
+   if (!$row){
+    header("location: home.php");
+   }
+
+   $nombre = $row["nombre"];
+   $descripcion = $row["descripcion"];
+   $cantidad_disponible = $row["cantidad_disponible"];
+   $precio_unitario = $row["precio_unitario"];
+   $fecha_adquisicion = $row["fecha_adquisicion"];
+
+}else{
+
+    $id = $_POST["id"];
     $nombre = $_POST["nombre"];
     $descripcion = $_POST["descripcion"];
     $cantidad_disponible = $_POST["cantidad_disponible"];
     $precio_unitario = $_POST["precio_unitario"];
     $fecha_adquisicion = $_POST["fecha_adquisicion"];
 
+    $sql = "UPDATE productos " . // Añadir un espacio después de "productos"
+    "SET nombre = '$nombre', descripcion = '$descripcion', cantidad_disponible = '$cantidad_disponible', precio_unitario = '$precio_unitario', fecha_adquisicion = '$fecha_adquisicion' " . // Añadir un espacio después de "SET"
+    "WHERE id = $id";
 
-$sql = "INSERT INTO productos (nombre, descripcion, cantidad_disponible, precio_unitario, fecha_adquisicion)" .
-        "VALUES ('$nombre', '$descripcion', '$cantidad_disponible', '$precio_unitario', '$fecha_adquisicion')";
-        $result = $conection->query($sql);
 
+    $result = $conection->query($sql);
 
 }
+
+
+
 ?>
+
+
+
 
 
 <!DOCTYPE html>
@@ -50,11 +84,12 @@ $sql = "INSERT INTO productos (nombre, descripcion, cantidad_disponible, precio_
   <i class="fa-solid fa-layer-group fa-2x"></i>  
   <br><br>
     <form action="" method="post" >
+        <input type="hidden" name="id" value="<?php echo $id; ?>">
     <label class="form-label"> Nombre</label>
     <input  name="nombre" required  class="form-control" value="<?php echo $nombre; ?>"  >
     <br>
     <label class="form-label"> Descripcion</label>
-    <textarea name="descripcion"  required  class="form-control" value="<?php echo $descripcion; ?>" ></textarea>
+    <textarea name="descripcion" required class="form-control"><?php echo $descripcion; ?></textarea>
     <br>
     <label class="form-label">  Cantidad Disponible</label>
     <input name="cantidad_disponible" type="number" required  class="form-control" value="<?php echo $cantidad_disponible; ?>" >
@@ -63,7 +98,7 @@ $sql = "INSERT INTO productos (nombre, descripcion, cantidad_disponible, precio_
     <input name="precio_unitario" type="number" required  class="form-control" value="<?php echo $precio_unitario; ?>">
     <br>
     <label class="form-label"> Fecha adquisicion</label>
-    <input name="fecha_adquisicion" type="datetime-local"  required  class="form-control" value="<?php echo $fecha_adquisicion; ?>">
+    <input name="fecha_adquisicion" type="datetime-local"  required  class="form-control" value="<?php echo date('Y-m-d\TH:i', strtotime($fecha_adquisicion)); ?>">
     <br>
     <a href="home.php" title="Volver" style="background-color: #34495E;" class="btn btn"><i class="fa-solid fa-share fa-rotate-180" style="color: #f7f7f7;"></i></a>
     <button type="submit" title="Guardar"  style="background-color: #34495E;" class="btn btn"><i class="fa-solid fa-floppy-disk" style="color: #f7f7f7;"></i></s></button>

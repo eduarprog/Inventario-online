@@ -5,7 +5,6 @@ if(!isset($_SESSION["usuario"])) {
     exit();
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,12 +24,6 @@ if(!isset($_SESSION["usuario"])) {
             font-size: 20px;
             zoom: 75%;
             background-color: #D6DBDF;
-        }
-
-        a:hover {
-            text-decoration: none;
-            opacity: 0.8;
-            align-content: center;
         }
 
         .fijo {
@@ -70,14 +63,13 @@ if(!isset($_SESSION["usuario"])) {
         }
     </style>
 </head>
-
 <body>
     <div class="fijo">
         <nav class="navbar navbar-expand-lg navbar-dark bg-" style="background-color: #D6DBDF;">
             <li class="nav-link" data-bs-toggle="tooltip" data-bs-placement="top" title="Ferreteria Jotta-R">
             </li>
             <div class="container">
-                <a class="navbar-brand" href="" style="color:black" >INICIO</a>
+            <a class="navbar-brand" href="" style="color:black; margin: 1px;" ></a>
            <!--     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
@@ -129,14 +121,17 @@ if(!isset($_SESSION["usuario"])) {
                     </ul>
                     </ul> -->
                     <li class="navbar-nav">
-                        <a href="logout.php" title="Salir"><i class="fa-solid fa-arrow-right-from-bracket"
+                        <a style="text-decoration: none;" href="logout.php" title="Salir"><i class="fa-solid fa-arrow-right-from-bracket"
                                 style="color: #e40c0c;"></i></a>
+                               
                     </li>
                 </div>
             </div>
         </nav>
     </div>
     <br><br><br><br>
+    <a style="margin: 1365px" title="Agregar" href="create.php" ><i class="fa-solid fa-square-plus fa-xl" style="color: blue;"></i></a>
+    <br><br>
     <div class="container">
         <div class="content">
             <table class="table">
@@ -144,29 +139,43 @@ if(!isset($_SESSION["usuario"])) {
                     <!-- <a href="home.php"> <i class="fa-solid fa-rotate-right"></i></a> --->
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Handle</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Descripcion</th>
+                        <th scope="col">Cantidad Disponible</th>
+                        <th scope="col">Precio Unitario</th>
+                        <th scope="col">Fecha de Adquisicion</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
+                <?php
+require 'conection.php';
+$conection = conection();
+
+$sql = "SELECT * FROM productos";
+$result = $conection->query($sql);
+
+if (!$result){
+    die("Invalid query: " . $conection->error);
+}
+
+
+while($row =  $result->fetch_assoc()){
+    echo "
+    <tr>
+                        <th scope='row'>$row[id]</th>
+                        <td>$row[nombre]</td>
+                        <td>$row[descripcion]</td>
+                        <td>$row[cantidad_disponible]</td>
+                        <td>$row[precio_unitario]</td>
+                        <td>$row[fecha_adquisicion]</td>
+                        <td>
+                            <a href='edit.php?id=$row[id]' title='Editar'><i class='fa-solid fa-pen-to-square fa-lg' style='color: #0af539;'></i></a> &nbsp;
+                            <a href='delete.php?id=$row[id]' title='Eliminar'><i class='fa-solid fa-trash fa-lg' style='color: #f91010;'></i></a>
+                        </td>
                     </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td colspan="2">Larry the Bird</td>
-                        <td>@twitter</td>
-                    </tr>
+    ";
+}
+?>
                 </tbody>
             </table>
         </div>
