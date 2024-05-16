@@ -17,6 +17,7 @@ if(!isset($_SESSION["usuario"])) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
+        <link rel=" shorcut icon" href="img/logob2.png">
     <title>Home - Inventory</title>
     <style>
         body {
@@ -130,13 +131,18 @@ if(!isset($_SESSION["usuario"])) {
         </nav>
     </div>
     <br><br><br><br>
-    <a style="margin: 1365px" title="Agregar" href="create.php" ><i class="fa-solid fa-square-plus fa-xl" style="color: blue;"></i></a>
+    <a style="margin: 1365px" title="Agregar" href="create.php" ><i class="fa-solid fa-square-plus fa-xl fa-bounce" style="color: blue;"></i></a>
     <br><br>
     <div class="container">
         <div class="content">
             <table class="table">
                 <thead>
                     <!-- <a href="home.php"> <i class="fa-solid fa-rotate-right"></i></a> --->
+                    <tr>
+                        <th scope="col">
+                            <a href="home.php" title="Actualizar" ><i class="fa-solid fa-rotate-right fa-spin-pulse" style="color: #e2d008;"></i></a>
+                        </th>
+                    </tr>
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Nombre</th>
