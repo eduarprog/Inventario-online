@@ -62,6 +62,25 @@ if(!isset($_SESSION["usuario"])) {
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
+        .aaa {
+  padding: 10px;
+  color: #CA0403;
+  text-decoration: none;
+  border: 3px solid darkred;
+  background:  #fff;
+  box-sizing: border-box;
+  opacity: 0.8;
+  align-content: center;
+  border-radius: 20px;
+        }
+    .search .search-input {
+    padding: 0 53px;
+    caret-color: #000;
+    font-size: 23px;
+    font-weight: 300;
+    color: black;
+    transition: width 0.3s linear;
+}
     </style>
 </head>
 <body>
@@ -70,57 +89,22 @@ if(!isset($_SESSION["usuario"])) {
             <li class="nav-link" data-bs-toggle="tooltip" data-bs-placement="top" title="Ferreteria Jotta-R">
             </li>
             <div class="container">
-            <a class="navbar-brand" href="" style="color:black; margin: 1px;" ></a>
-           <!--     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="nosotros.php">NOSOTROS</a>
-                        </li>
-                        <li class="nav-item">
-                            <div class="dropdown">
-                                <a class="nav-link" class="btn dropdown-toggle " type="button" style="color: #fff;"
-                                    id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                    SERVICIOS <i class="fa-sharp fa-solid fa-chevron-up fa-rotate-180 fa-xs"
-                                        style="color: #f7f7f7;"></i>
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-danger">
-                                    <li><a class="dropdown-item" href="cotizacion.php"><i class="fa-solid fa-tag"
-                                                style="color: #e40c0c;"></i> &nbsp; COTIZACION</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="contacto.php"> CONTACTO</a>
-                        </li>
-                        <div class="dropdown">
-                            <a class="nav-link" class="btn dropdown-toggle" type="button" style="color: #fff;"
-                                id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                PRODUCTOS <i class="fa-sharp fa-solid fa-chevron-up fa-rotate-180 fa-xs"
-                                    style="color: #f7f7f7;"></i>
-                                </button>
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-danger">
-                                <li> <a class="dropdown-item" href="productos.php"> <i class="fa-solid fa-list"
-                                            style="color: #e40c0c;"></i>
-                                        &nbsp; TODOS
-                                    </a></li>
-                                <li><a class="dropdown-item" href="hogar.php"><i class="fa-solid fa-house"
-                                            style="color: #e40c0c;"></i> &nbsp; HOGAR</a></li>
-                                <li><a class="dropdown-item" href="plomeria.php"> <i class="fa-solid fa-toilet"
-                                            style="color: #e40c0c;"></i> &nbsp; PLOMERIA</a></li>
-                                <li><a class="dropdown-item" href="pinturas.php"> <i class="fa-solid fa-palette"
-                                            style="color: #e40c0c;"></i> &nbsp; PINTURAS</a></li>
-                                <li><a class="dropdown-item" href="electricos.php"> <i class="fa-solid fa-bolt"
-                                            style="color: #e40c0c;"></i> &nbsp; ELÉCTRICOS</a></li>
-                                <li><a class="dropdown-item" href="construccion.php"> <i
-                                            class="fa-solid fa-person-digging" style="color: #e40c0c;"></i>
-                                        &nbsp;CONSTRUCCIÓN</a></li>
-                                <li><a class="dropdown-item" href="bombillos.php"><i class="fa-solid fa-lightbulb"
-                                            style="color: #e40c0c;"></i> &nbsp; BOMBILLOS</a></li>
-                            </ul>
+            <form class="d-flex" id="form2" name="form2"  method="POST">
+    <div class="container mt-4">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-9">
+                <div class="1card p-2 mt-2">
+                    <div class="d-flex justify-content-center px-5">
+                        <div class="search" style="border: 3px solid darkred ">
+                         <input   type="search"  class="search-input" name="buscar" placeholder="¿Qué estás buscando?">                           
+                            <br>
                         </div>
-                    </ul>
-                    </ul> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
                     <li class="navbar-nav">
                         <a style="text-decoration: none;" href="logout.php" title="Salir"><i class="fa-solid fa-arrow-right-from-bracket"
                                 style="color: #e40c0c;"></i></a>
@@ -131,8 +115,6 @@ if(!isset($_SESSION["usuario"])) {
         </nav>
     </div>
     <br><br><br><br>
-    <a style="margin: 1365px" title="Agregar" href="create.php" ><i class="fa-solid fa-square-plus fa-xl fa-bounce" style="color: blue;"></i></a>
-    <br><br>
     <div class="container">
         <div class="content">
             <table class="table">
@@ -150,19 +132,35 @@ if(!isset($_SESSION["usuario"])) {
                         <th scope="col">Cantidad Disponible</th>
                         <th scope="col">Precio Unitario</th>
                         <th scope="col">Fecha de Adquisicion</th>
+                        <th scope="col"><a title="Agregar" href="create.php" ><i class="fa-solid fa-square-plus fa-lg" style="color: blue;"></i></a>&nbsp;<a title="Exportar EXCEL" href="excel.php" ><i class="fa-solid fa-print fa-lg" style="color: green;"></i></a></th>
                     </tr>
                 </thead>
                 <tbody>
                 <?php
 require 'conection.php';
 $conection = conection();
+$por_pagina = 2;
 
-$sql = "SELECT * FROM productos";
-$result = $conection->query($sql);
+$pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 1;
+$empieza = ($pagina - 1) * $por_pagina;
 
-if (!$result){
-    die("Invalid query: " . $conection->error);
+if (!empty($_POST['buscar'])) {
+    $buscar = $_POST['buscar'];
+    $sql = "SELECT * FROM productos WHERE nombre LIKE ? LIMIT ?, ?";
+    $stmt = $conection->prepare($sql);
+    $buscar_param = '%' . $buscar . '%';
+    $stmt->bind_param("sii", $buscar_param, $empieza, $por_pagina);
+} else {
+    $sql = "SELECT * FROM productos LIMIT ?, ?";
+    $stmt = $conection->prepare($sql);
+    $stmt->bind_param("ii", $empieza, $por_pagina);
 }
+
+$stmt->execute();
+$result = $stmt->get_result();
+
+
+
 
 
 while($row =  $result->fetch_assoc()){
@@ -185,6 +183,46 @@ while($row =  $result->fetch_assoc()){
                 </tbody>
             </table>
         </div>
+<?php
+      // Obtener el total de registros para la paginación
+      $sql_total = "SELECT COUNT(*) AS total FROM productos";
+      $result_total = $conection->query($sql_total);
+      if ($result_total) {
+          $row_total = $result_total->fetch_assoc();
+          $total_registros = $row_total['total'];
+          $total_paginas = ceil($total_registros / $por_pagina);
+      } else {
+          die("Error al obtener el total de registros: " . $conection->error);
+      }
+      
+      // Procesar los resultados
+      if (mysqli_num_rows($result) > 0) {
+          while ($row = $result->fetch_assoc()) {
+              echo $row['Nombre'] . "<br>";
+          }
+      } else {
+          echo "No se encontraron resultados.";
+      }
+      
+      // Paginación
+      echo "<br><center>";
+      if ($pagina > 1) {
+          echo "<a title='Atrás' style='margin-left: 10px' class='aa' href='home.php?pagina=" . ($pagina - 1) . "'>" . '<i class="fa-solid fa-chevron-up fa-rotate-270 fa-lx" style="color: #CA0403;"></i>' . "</a>";
+      }
+      echo "<a title='Pagina actual' class='aaa' style='margin-left: 10px; '> " . $pagina . " / " . $total_paginas . " </a>";
+      if ($pagina < $total_paginas) {
+          echo "<a title='Siguiente' class='aa' style='margin-left: 10px' href='home.php?pagina=" . ($pagina + 1) . "'>" . '<i class="fa-solid fa-chevron-up fa-rotate-90 fa-lx" style="color: #CA0403;"></i>' . "</a>";
+      }
+      echo "<br><br><hr><h5 style='color:#fff'><br><br></h5>";
+      
+      // Cerrar la declaración y la conexión
+      if ($stmt) {
+          $stmt->close();
+      }
+      $conection->close();
+      ?>
+
+      
 </body>
 
 </html>
