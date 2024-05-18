@@ -53,8 +53,16 @@ $sql = "INSERT INTO productos (nombre, descripcion, cantidad_disponible, precio_
     <label class="form-label"> Nombre</label>
     <input  name="nombre" required  class="form-control" value="<?php echo $nombre; ?>"  >
     <br>
-    <label class="form-label"> Descripcion</label>
-    <textarea name="descripcion"  required  class="form-control" value="<?php echo $descripcion; ?>" ></textarea>
+    <<label class="form-label">Categoría</label>
+    <select class="form-select" name="descripcion">
+        <option value="" <?php echo isset($descripcion) && $descripcion == '' ? 'selected' : ''; ?>Categorias</option>
+        <option value="Hogar" <?php echo isset($descripcion) && $descripcion == 'Hogar' ? 'selected' : ''; ?>>Hogar</option>
+        <option value="Plomeria" <?php echo isset($descripcion) && $descripcion == 'Plomeria' ? 'selected' : ''; ?>>Plomería</option>
+        <option value="Pinturas" <?php echo isset($descripcion) && $descripcion == 'Pinturas' ? 'selected' : ''; ?>>Pinturas</option>
+        <option value="Electricos" <?php echo isset($descripcion) && $descripcion == 'Electricos' ? 'selected' : ''; ?>>Eléctricos</option>
+        <option value="Construcción" <?php echo isset($descripcion) && $descripcion == 'Construcción' ? 'selected' : ''; ?>>Construcción</option>
+        <option value="Bombillos" <?php echo isset($descripcion) && $descripcion == 'Bombillos' ? 'selected' : ''; ?>>Bombillos</option>
+    </select>
     <br>
     <label class="form-label">  Cantidad Disponible</label>
     <input name="cantidad_disponible" type="number" required  class="form-control" value="<?php echo $cantidad_disponible; ?>" >

@@ -128,7 +128,7 @@ if(!isset($_SESSION["usuario"])) {
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Nombre</th>
-                        <th scope="col">Descripcion</th>
+                        <th scope="col">Categoria</th>
                         <th scope="col">Cantidad Disponible</th>
                         <th scope="col">Precio Unitario</th>
                         <th scope="col">Fecha de Adquisicion</th>
@@ -170,7 +170,7 @@ while($row =  $result->fetch_assoc()){
                         <td>$row[nombre]</td>
                         <td>$row[descripcion]</td>
                         <td>$row[cantidad_disponible]</td>
-                        <td>$row[precio_unitario]</td>
+                        <td>RD$$row[precio_unitario]</td>
                         <td>$row[fecha_adquisicion]</td>
                         <td>
                             <a href='edit.php?id=$row[id]' title='Editar'><i class='fa-solid fa-pen-to-square fa-lg' style='color: #0af539;'></i></a> &nbsp;
