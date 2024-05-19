@@ -5,9 +5,9 @@ if(!isset($_SESSION["usuario"])) {
     exit();
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -74,29 +74,68 @@ if(!isset($_SESSION["usuario"])) {
   border-radius: 20px;
         }
     .search .search-input {
-    padding: 0 53px;
+    padding: 0 54px;
     caret-color: #000;
     font-size: 23px;
     font-weight: 300;
-    color: black;
     transition: width 0.3s linear;
+    border-radius: 12px;
+    border: 3px solid darkred;
 }
     </style>
 </head>
+<?php
+require_once 'conection.php';
+// Verificar si el usuario está autenticado
+if(isset($_SESSION["usuario"])) {
+    $user = $_SESSION["usuario"];
+    // Realizar una consulta para obtener el nombre del usuario
+    $conection = conection(); // Establecer la conexión
+
+    $sql = "SELECT nombre FROM usuario WHERE user = '$user'";
+    $resultado = $conection->query($sql);
+
+    if($resultado->num_rows > 0) {
+        $usuario = $resultado->fetch_assoc();
+        $nombre = $usuario["nombre"];
+    } else {
+        // Si no se encuentra el usuario en la base de datos, maneja el error adecuadamente
+        $nombre = "Nombre no encontrado";
+    }
+} else {
+    // Si no hay sesión iniciada, redirigir al login
+    header("Location: login.php");
+    exit();
+}
+
+$por_pagina = 10;
+
+$sql_total = "SELECT COUNT(*) AS total FROM productos";
+      $result_total = $conection->query($sql_total);
+      if ($result_total) {
+          $row_total = $result_total->fetch_assoc();
+          $total_registros = $row_total['total'];
+          $total_paginas = ceil($total_registros / $por_pagina);
+      } else {
+          die("Error al obtener el total de registros: " . $conection->error);
+      }
+?>
 <body>
     <div class="fijo">
         <nav class="navbar navbar-expand-lg navbar-dark bg-" style="background-color: #D6DBDF;">
             <li class="nav-link" data-bs-toggle="tooltip" data-bs-placement="top" title="Ferreteria Jotta-R">
             </li>
             <div class="container">
+          <h6 style="cursor: pointer;" title="Usuario conectado" ><i class="fa-solid fa-circle-user fa-xl"
+                                style="color: #00bd84;"></i> &nbsp; <?php echo $nombre ?></h6>  
             <form class="d-flex" id="form2" name="form2"  method="POST">
     <div class="container mt-4">
         <div class="row d-flex justify-content-center">
             <div class="col-md-9">
                 <div class="1card p-2 mt-2">
                     <div class="d-flex justify-content-center px-5">
-                        <div class="search" style="border: 3px solid darkred ">
-                         <input   type="search"  class="search-input" name="buscar" placeholder="¿Qué estás buscando?">                           
+                        <div class="search">
+                         <input title="Busca un producto"  type="search"  class="search-input" name="buscar" placeholder="¿Qué estás buscando?">                           
                             <br>
                         </div>
                     </div>
@@ -120,6 +159,7 @@ if(!isset($_SESSION["usuario"])) {
             <table class="table">
                 <thead>
                     <!-- <a href="home.php"> <i class="fa-solid fa-rotate-right"></i></a> --->
+             Total de registros: <b> &nbsp; <?php echo $total_registros ?> </>
                     <tr>
                         <th scope="col">
                             <a href="home.php" title="Actualizar" ><i class="fa-solid fa-rotate-right fa-spin-pulse" style="color: #e2d008;"></i></a>
@@ -132,14 +172,15 @@ if(!isset($_SESSION["usuario"])) {
                         <th scope="col">Cantidad Disponible</th>
                         <th scope="col">Precio Unitario</th>
                         <th scope="col">Fecha de Adquisicion</th>
+                        
                         <th scope="col"><a title="Agregar" href="create.php" ><i class="fa-solid fa-square-plus fa-lg" style="color: blue;"></i></a>&nbsp;<a title="Exportar EXCEL" href="excel.php" ><i class="fa-solid fa-print fa-lg" style="color: green;"></i></a></th>
                     </tr>
                 </thead>
                 <tbody>
                 <?php
-require 'conection.php';
+require_once 'conection.php';
 $conection = conection();
-$por_pagina = 2;
+$por_pagina = 10;
 
 $pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 1;
 $empieza = ($pagina - 1) * $por_pagina;
@@ -158,10 +199,6 @@ if (!empty($_POST['buscar'])) {
 
 $stmt->execute();
 $result = $stmt->get_result();
-
-
-
-
 
 while($row =  $result->fetch_assoc()){
     echo "
@@ -201,7 +238,7 @@ while($row =  $result->fetch_assoc()){
               echo $row['Nombre'] . "<br>";
           }
       } else {
-          echo "No se encontraron resultados.";
+          echo "<br>No se encontraron resultados. :/ <br>";
       }
       
       // Paginación
@@ -213,7 +250,8 @@ while($row =  $result->fetch_assoc()){
       if ($pagina < $total_paginas) {
           echo "<a title='Siguiente' class='aa' style='margin-left: 10px' href='home.php?pagina=" . ($pagina + 1) . "'>" . '<i class="fa-solid fa-chevron-up fa-rotate-90 fa-lx" style="color: #CA0403;"></i>' . "</a>";
       }
-      echo "<br><br><hr><h5 style='color:#fff'><br><br></h5>";
+      echo "<br><br><hr><br> &copy; 2024 - <b>Ferreteria Jotta-R</b> - Todos los derechos reservado";
+      
       
       // Cerrar la declaración y la conexión
       if ($stmt) {
@@ -222,7 +260,5 @@ while($row =  $result->fetch_assoc()){
       $conection->close();
       ?>
 
-      
 </body>
-
 </html>

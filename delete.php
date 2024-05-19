@@ -8,7 +8,7 @@ if (isset($_GET["id"]) ){
 $sql = "DELETE FROM productos WHERE id=$id";
 $conection->query($sql);
 
-header("locatio: home.php");
+header("location: home.php");
 exit;
 
 }

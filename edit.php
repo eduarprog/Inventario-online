@@ -49,6 +49,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET'){
 
     $result = $conection->query($sql);
 
+    header("location: home.php");
+exit;
+
 }
 
 

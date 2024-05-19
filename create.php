@@ -53,8 +53,8 @@ $sql = "INSERT INTO productos (nombre, descripcion, cantidad_disponible, precio_
     <label class="form-label"> Nombre</label>
     <input  name="nombre" required  class="form-control" value="<?php echo $nombre; ?>"  >
     <br>
-    <<label class="form-label">Categoría</label>
-    <select class="form-select" name="descripcion">
+    <label class="form-label">Categoría</label>
+    <select required class="form-select" name="descripcion">
         <option value="" <?php echo isset($descripcion) && $descripcion == '' ? 'selected' : ''; ?>Categorias</option>
         <option value="Hogar" <?php echo isset($descripcion) && $descripcion == 'Hogar' ? 'selected' : ''; ?>>Hogar</option>
         <option value="Plomeria" <?php echo isset($descripcion) && $descripcion == 'Plomeria' ? 'selected' : ''; ?>>Plomería</option>
