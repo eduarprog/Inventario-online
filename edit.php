@@ -42,8 +42,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET'){
     $precio_unitario = $_POST["precio_unitario"];
     $fecha_adquisicion = $_POST["fecha_adquisicion"];
 
-    $sql = "UPDATE productos " . // Añadir un espacio después de "productos"
-    "SET nombre = '$nombre', descripcion = '$descripcion', cantidad_disponible = '$cantidad_disponible', precio_unitario = '$precio_unitario', fecha_adquisicion = '$fecha_adquisicion' " . // Añadir un espacio después de "SET"
+    $sql = "UPDATE productos " . 
+    "SET nombre = '$nombre', descripcion = '$descripcion', cantidad_disponible = '$cantidad_disponible', precio_unitario = '$precio_unitario', fecha_adquisicion = '$fecha_adquisicion' " . 
     "WHERE id = $id";
 
 
@@ -58,10 +58,6 @@ exit;
 
 ?>
 
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -70,7 +66,8 @@ exit;
     <script src="https://kit.fontawesome.com/f97fcd2c02.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <title>Crear</title>
+    <title>Editar registro - Inventory</title>
+    <link rel=" shorcut icon" href="img/logob2.png">
     <link rel="stylesheet" href="style.css">
     <style>
         body{

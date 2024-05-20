@@ -20,6 +20,8 @@ $sql = "INSERT INTO productos (nombre, descripcion, cantidad_disponible, precio_
         "VALUES ('$nombre', '$descripcion', '$cantidad_disponible', '$precio_unitario', '$fecha_adquisicion')";
         $result = $conection->query($sql);
 
+        header("location: home.php");
+        exit;
 
 }
 ?>
@@ -33,7 +35,8 @@ $sql = "INSERT INTO productos (nombre, descripcion, cantidad_disponible, precio_
     <script src="https://kit.fontawesome.com/f97fcd2c02.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <title>Crear</title>
+    <title>Agregar nuevo - Inventory</title>
+    <link rel=" shorcut icon" href="img/logob2.png">
     <link rel="stylesheet" href="style.css">
     <style>
         body{
@@ -49,9 +52,9 @@ $sql = "INSERT INTO productos (nombre, descripcion, cantidad_disponible, precio_
   <div class="card-body">
   <i class="fa-solid fa-layer-group fa-2x"></i>  
   <br><br>
-    <form action="" method="post" >
+    <form  method="post" >
     <label class="form-label"> Nombre</label>
-    <input  name="nombre" required  class="form-control" value="<?php echo $nombre; ?>"  >
+    <input  name="nombre" required  class="form-control" value="<?php echo $nombre; ?>">
     <br>
     <label class="form-label">Categoría</label>
     <select required class="form-select" name="descripcion">
@@ -67,10 +70,10 @@ $sql = "INSERT INTO productos (nombre, descripcion, cantidad_disponible, precio_
     <label class="form-label">  Cantidad Disponible</label>
     <input name="cantidad_disponible" type="number" required  class="form-control" value="<?php echo $cantidad_disponible; ?>" >
     <br>
-    <label class="form-label"> Precio unitario</label>
+    <label class="form-label"> Precio Unitario</label>
     <input name="precio_unitario" type="number" required  class="form-control" value="<?php echo $precio_unitario; ?>">
     <br>
-    <label class="form-label"> Fecha adquisicion</label>
+    <label class="form-label"> Fecha de Llegada</label>
     <input name="fecha_adquisicion" type="datetime-local"  required  class="form-control" value="<?php echo $fecha_adquisicion; ?>">
     <br>
     <a href="home.php" title="Volver" style="background-color: #34495E;" class="btn btn"><i class="fa-solid fa-share fa-rotate-180" style="color: #f7f7f7;"></i></a>

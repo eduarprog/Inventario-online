@@ -18,7 +18,7 @@ if(!isset($_SESSION["usuario"])) {
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
         <link rel=" shorcut icon" href="img/logob2.png">
-    <title>Home - Inventory</title>
+    <title>Centro de registros - Inventory</title>
     <style>
         body {
             font-family: 'Crimson Pro', serif;
@@ -126,8 +126,8 @@ $sql_total = "SELECT COUNT(*) AS total FROM productos";
             <li class="nav-link" data-bs-toggle="tooltip" data-bs-placement="top" title="Ferreteria Jotta-R">
             </li>
             <div class="container">
-          <h6 style="cursor: pointer;" title="Usuario conectado" ><i class="fa-solid fa-circle-user fa-xl"
-                                style="color: #00bd84;"></i> &nbsp; <?php echo $nombre ?></h6>  
+          <h5 style="cursor: pointer;" title="Usuario conectado" ><i class="fa-solid fa-circle-user fa-xl"
+                                style="color: #00bd84;"></i> &nbsp; <?php echo $nombre ?></h5>  
             <form class="d-flex" id="form2" name="form2"  method="POST">
     <div class="container mt-4">
         <div class="row d-flex justify-content-center">
@@ -144,7 +144,7 @@ $sql_total = "SELECT COUNT(*) AS total FROM productos";
         </div>
     </div>
 </form>
-                    <li class="navbar-nav">
+          <li class="navbar-nav">
                         <a style="text-decoration: none;" href="logout.php" title="Salir"><i class="fa-solid fa-arrow-right-from-bracket"
                                 style="color: #e40c0c;"></i></a>
                                
@@ -171,9 +171,8 @@ $sql_total = "SELECT COUNT(*) AS total FROM productos";
                         <th scope="col">Categoria</th>
                         <th scope="col">Cantidad Disponible</th>
                         <th scope="col">Precio Unitario</th>
-                        <th scope="col">Fecha de Adquisicion</th>
-                        
-                        <th scope="col"><a title="Agregar" href="create.php" ><i class="fa-solid fa-square-plus fa-lg" style="color: blue;"></i></a>&nbsp;<a title="Exportar EXCEL" href="excel.php" ><i class="fa-solid fa-print fa-lg" style="color: green;"></i></a></th>
+                        <th scope="col">Fecha de Llegada</th>
+                        <th scope="col"><a title="Agregar" href="create.php" ><i class="fa-solid fa-square-plus fa-lg" style="color: blue;"></i></a>&nbsp;<a title="EXCEL" href="excel.php" ><i class="fa-solid fa-print fa-lg" style="color: green;"></i></a></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -187,7 +186,7 @@ $empieza = ($pagina - 1) * $por_pagina;
 
 if (!empty($_POST['buscar'])) {
     $buscar = $_POST['buscar'];
-    $sql = "SELECT * FROM productos WHERE nombre LIKE ? LIMIT ?, ?";
+    $sql = "SELECT * FROM productos WHERE nombre LIKE '%$buscar%' OR descripcion LIKE '%$buscar%' OR fecha_adquisicion LIKE '%$buscar%' OR precio_unitario LIKE '%$buscar%' OR cantidad_disponible LIKE ? LIMIT ?, ?";
     $stmt = $conection->prepare($sql);
     $buscar_param = '%' . $buscar . '%';
     $stmt->bind_param("sii", $buscar_param, $empieza, $por_pagina);
