@@ -8,7 +8,7 @@ $cantidad_disponible = "";
 $precio_unitario = "";
 $fecha_adquisicion = "";
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $nombre = $_POST["nombre"];
     $descripcion = $_POST["descripcion"];
     $cantidad_disponible = $_POST["cantidad_disponible"];
@@ -16,16 +16,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     $fecha_adquisicion = $_POST["fecha_adquisicion"];
 
 
-$sql = "INSERT INTO productos (nombre, descripcion, cantidad_disponible, precio_unitario, fecha_adquisicion)" .
+    $sql = "INSERT INTO productos (nombre, descripcion, cantidad_disponible, precio_unitario, fecha_adquisicion)" .
         "VALUES ('$nombre', '$descripcion', '$cantidad_disponible', '$precio_unitario', '$fecha_adquisicion')";
-        $result = $conection->query($sql);
+    $result = $conection->query($sql);
 
-        header("location: home.php");
-        exit;
-
+    header("location: home.php");
+    exit;
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -39,49 +37,49 @@ $sql = "INSERT INTO productos (nombre, descripcion, cantidad_disponible, precio_
     <link rel=" shorcut icon" href="img/logob2.png">
     <link rel="stylesheet" href="style.css">
     <style>
-        body{
+        body {
             zoom: 85%;
         }
     </style>
 </head>
 <b>
-<br><br><br><br><br><br><br><br><br><br>
-<div class="container">
-<div class="content">
-<div class="card"  style="max-width: 18rem; text-align: center; ">
-  <div class="card-body">
-  <i class="fa-solid fa-layer-group fa-2x"></i>  
-  <br><br>
-    <form  method="post" >
-    <label class="form-label"> Nombre</label>
-    <input  name="nombre" required  class="form-control" value="<?php echo $nombre; ?>">
-    <br>
-    <label class="form-label">Categoría</label>
-    <select required class="form-select" name="descripcion">
-        <option value="" <?php echo isset($descripcion) && $descripcion == '' ? 'selected' : ''; ?>Categorias</option>
-        <option value="Hogar" <?php echo isset($descripcion) && $descripcion == 'Hogar' ? 'selected' : ''; ?>>Hogar</option>
-        <option value="Plomeria" <?php echo isset($descripcion) && $descripcion == 'Plomeria' ? 'selected' : ''; ?>>Plomería</option>
-        <option value="Pinturas" <?php echo isset($descripcion) && $descripcion == 'Pinturas' ? 'selected' : ''; ?>>Pinturas</option>
-        <option value="Electricos" <?php echo isset($descripcion) && $descripcion == 'Electricos' ? 'selected' : ''; ?>>Eléctricos</option>
-        <option value="Construcción" <?php echo isset($descripcion) && $descripcion == 'Construcción' ? 'selected' : ''; ?>>Construcción</option>
-        <option value="Bombillos" <?php echo isset($descripcion) && $descripcion == 'Bombillos' ? 'selected' : ''; ?>>Bombillos</option>
-    </select>
-    <br>
-    <label class="form-label">  Cantidad Disponible</label>
-    <input name="cantidad_disponible" type="number" required  class="form-control" value="<?php echo $cantidad_disponible; ?>" >
-    <br>
-    <label class="form-label"> Precio Unitario</label>
-    <input name="precio_unitario" type="number" required  class="form-control" value="<?php echo $precio_unitario; ?>">
-    <br>
-    <label class="form-label"> Fecha de Llegada</label>
-    <input name="fecha_adquisicion" type="datetime-local"  required  class="form-control" value="<?php echo $fecha_adquisicion; ?>">
-    <br>
-    <a href="home.php" title="Volver" style="background-color: #34495E;" class="btn btn"><i class="fa-solid fa-share fa-rotate-180" style="color: #f7f7f7;"></i></a>
-    <button type="submit" title="Guardar"  style="background-color: #34495E;" class="btn btn"><i class="fa-solid fa-floppy-disk" style="color: #f7f7f7;"></i></s></button>
-    </form>
-  </div>
-</div>
-</div>
-</div>
+    <br><br><br><br><br><br><br><br><br><br>
+    <div class="container">
+        <div class="content">
+            <div class="card" style="max-width: 18rem; text-align: center; ">
+                <div class="card-body">
+                    <i class="fa-solid fa-layer-group fa-2x"></i>
+                    <br><br>
+                    <form method="post">
+                        <label class="form-label"> Nombre</label>
+                        <input name="nombre" required class="form-control" value="<?php echo $nombre; ?>">
+                        <br>
+                        <label class="form-label">Categoría</label>
+                        <select required class="form-select" name="descripcion">
+                            <option value="" <?php echo isset($descripcion) && $descripcion == '' ? 'selected' : ''; ?>Categorias</option>
+                            <option value="Hogar" <?php echo isset($descripcion) && $descripcion == 'Hogar' ? 'selected' : ''; ?>>Hogar</option>
+                            <option value="Plomeria" <?php echo isset($descripcion) && $descripcion == 'Plomeria' ? 'selected' : ''; ?>>Plomería</option>
+                            <option value="Pinturas" <?php echo isset($descripcion) && $descripcion == 'Pinturas' ? 'selected' : ''; ?>>Pinturas</option>
+                            <option value="Electricos" <?php echo isset($descripcion) && $descripcion == 'Electricos' ? 'selected' : ''; ?>>Eléctricos</option>
+                            <option value="Construcción" <?php echo isset($descripcion) && $descripcion == 'Construcción' ? 'selected' : ''; ?>>Construcción</option>
+                            <option value="Bombillos" <?php echo isset($descripcion) && $descripcion == 'Bombillos' ? 'selected' : ''; ?>>Bombillos</option>
+                        </select>
+                        <br>
+                        <label class="form-label"> Cantidad Disponible</label>
+                        <input name="cantidad_disponible" type="number" required class="form-control" value="<?php echo $cantidad_disponible; ?>">
+                        <br>
+                        <label class="form-label"> Precio Unitario</label>
+                        <input name="precio_unitario" type="number" required class="form-control" value="<?php echo $precio_unitario; ?>">
+                        <br>
+                        <label class="form-label"> Fecha de Llegada</label>
+                        <input name="fecha_adquisicion" type="datetime-local" required class="form-control" value="<?php echo $fecha_adquisicion; ?>">
+                        <br>
+                        <a href="home.php" title="Volver" style="background-color: #34495E;" class="btn btn"><i class="fa-solid fa-share fa-rotate-180" style="color: #f7f7f7;"></i></a>
+                        <button type="submit" title="Guardar" style="background-color: #34495E;" class="btn btn"><i class="fa-solid fa-floppy-disk" style="color: #f7f7f7;"></i></s></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </b>
 </html>

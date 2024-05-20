@@ -10,30 +10,29 @@ $precio_unitario = "";
 $fecha_adquisicion = "";
 
 
-if ($_SERVER['REQUEST_METHOD'] == 'GET'){
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
-   if (!isset($_GET["id"])){
-    header("location: home.php");
-    exit;
-   }
+    if (!isset($_GET["id"])) {
+        header("location: home.php");
+        exit;
+    }
 
-   $id = $_GET["id"];
+    $id = $_GET["id"];
 
-   $sql = "SELECT * FROM productos WHERE id=$id";
-   $result = $conection->query($sql);
-   $row = $result->fetch_assoc();
+    $sql = "SELECT * FROM productos WHERE id=$id";
+    $result = $conection->query($sql);
+    $row = $result->fetch_assoc();
 
-   if (!$row){
-    header("location: home.php");
-   }
+    if (!$row) {
+        header("location: home.php");
+    }
 
-   $nombre = $row["nombre"];
-   $descripcion = $row["descripcion"];
-   $cantidad_disponible = $row["cantidad_disponible"];
-   $precio_unitario = $row["precio_unitario"];
-   $fecha_adquisicion = $row["fecha_adquisicion"];
-
-}else{
+    $nombre = $row["nombre"];
+    $descripcion = $row["descripcion"];
+    $cantidad_disponible = $row["cantidad_disponible"];
+    $precio_unitario = $row["precio_unitario"];
+    $fecha_adquisicion = $row["fecha_adquisicion"];
+} else {
 
     $id = $_POST["id"];
     $nombre = $_POST["nombre"];
@@ -42,20 +41,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET'){
     $precio_unitario = $_POST["precio_unitario"];
     $fecha_adquisicion = $_POST["fecha_adquisicion"];
 
-    $sql = "UPDATE productos " . 
-    "SET nombre = '$nombre', descripcion = '$descripcion', cantidad_disponible = '$cantidad_disponible', precio_unitario = '$precio_unitario', fecha_adquisicion = '$fecha_adquisicion' " . 
-    "WHERE id = $id";
+    $sql = "UPDATE productos " .
+        "SET nombre = '$nombre', descripcion = '$descripcion', cantidad_disponible = '$cantidad_disponible', precio_unitario = '$precio_unitario', fecha_adquisicion = '$fecha_adquisicion' " .
+        "WHERE id = $id";
 
 
     $result = $conection->query($sql);
 
     header("location: home.php");
-exit;
-
+    exit;
 }
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -70,50 +65,50 @@ exit;
     <link rel=" shorcut icon" href="img/logob2.png">
     <link rel="stylesheet" href="style.css">
     <style>
-        body{
+        body {
             zoom: 85%;
         }
     </style>
 </head>
 <b>
-<br><br><br><br><br><br><br><br><br><br>
-<div class="container">
-<div class="content">
-<div class="card"  style="max-width: 18rem; text-align: center; ">
-  <div class="card-body">
-  <i class="fa-solid fa-layer-group fa-2x"></i>  
-  <br><br>
-    <form action="" method="post" >
-        <input type="hidden" name="id" value="<?php echo $id; ?>">
-    <label class="form-label"> Nombre</label>
-    <input  name="nombre" required  class="form-control" value="<?php echo $nombre; ?>"  >
-    <br>
-    <label class="form-label">Categoría</label>
-    <select class="form-select" name="descripcion">
-        <option value="" <?php echo isset($descripcion) && $descripcion == '' ? 'selected' : ''; ?>Categorias</option>
-        <option value="Hogar" <?php echo isset($descripcion) && $descripcion == 'Hogar' ? 'selected' : ''; ?>>Hogar</option>
-        <option value="Plomeria" <?php echo isset($descripcion) && $descripcion == 'Plomeria' ? 'selected' : ''; ?>>Plomería</option>
-        <option value="Pinturas" <?php echo isset($descripcion) && $descripcion == 'Pinturas' ? 'selected' : ''; ?>>Pinturas</option>
-        <option value="Electricos" <?php echo isset($descripcion) && $descripcion == 'Electricos' ? 'selected' : ''; ?>>Eléctricos</option>
-        <option value="Construcción" <?php echo isset($descripcion) && $descripcion == 'Construcción' ? 'selected' : ''; ?>>Construcción</option>
-        <option value="Bombillos" <?php echo isset($descripcion) && $descripcion == 'Bombillos' ? 'selected' : ''; ?>>Bombillos</option>
-    </select>
-    <br>
-    <label class="form-label">  Cantidad Disponible</label>
-    <input name="cantidad_disponible" type="number" required  class="form-control" value="<?php echo $cantidad_disponible; ?>" >
-    <br>
-    <label class="form-label"> Precio unitario</label>
-    <input name="precio_unitario" type="number" required  class="form-control" value="<?php echo $precio_unitario; ?>">
-    <br>
-    <label class="form-label"> Fecha adquisicion</label>
-    <input name="fecha_adquisicion" type="datetime-local"  required  class="form-control" value="<?php echo date('Y-m-d\TH:i', strtotime($fecha_adquisicion)); ?>">
-    <br>
-    <a href="home.php" title="Volver" style="background-color: #34495E;" class="btn btn"><i class="fa-solid fa-share fa-rotate-180" style="color: #f7f7f7;"></i></a>
-    <button type="submit" title="Guardar"  style="background-color: #34495E;" class="btn btn"><i class="fa-solid fa-floppy-disk" style="color: #f7f7f7;"></i></s></button>
-    </form>
-  </div>
-</div>
-</div>
-</div>
+    <br><br><br><br><br><br><br><br><br><br>
+    <div class="container">
+        <div class="content">
+            <div class="card" style="max-width: 18rem; text-align: center; ">
+                <div class="card-body">
+                    <i class="fa-solid fa-layer-group fa-2x"></i>
+                    <br><br>
+                    <form action="" method="post">
+                        <input type="hidden" name="id" value="<?php echo $id; ?>">
+                        <label class="form-label"> Nombre</label>
+                        <input name="nombre" required class="form-control" value="<?php echo $nombre; ?>">
+                        <br>
+                        <label class="form-label">Categoría</label>
+                        <select class="form-select" name="descripcion">
+                            <option value="" <?php echo isset($descripcion) && $descripcion == '' ? 'selected' : ''; ?>Categorias</option>
+                            <option value="Hogar" <?php echo isset($descripcion) && $descripcion == 'Hogar' ? 'selected' : ''; ?>>Hogar</option>
+                            <option value="Plomeria" <?php echo isset($descripcion) && $descripcion == 'Plomeria' ? 'selected' : ''; ?>>Plomería</option>
+                            <option value="Pinturas" <?php echo isset($descripcion) && $descripcion == 'Pinturas' ? 'selected' : ''; ?>>Pinturas</option>
+                            <option value="Electricos" <?php echo isset($descripcion) && $descripcion == 'Electricos' ? 'selected' : ''; ?>>Eléctricos</option>
+                            <option value="Construcción" <?php echo isset($descripcion) && $descripcion == 'Construcción' ? 'selected' : ''; ?>>Construcción</option>
+                            <option value="Bombillos" <?php echo isset($descripcion) && $descripcion == 'Bombillos' ? 'selected' : ''; ?>>Bombillos</option>
+                        </select>
+                        <br>
+                        <label class="form-label"> Cantidad Disponible</label>
+                        <input name="cantidad_disponible" type="number" required class="form-control" value="<?php echo $cantidad_disponible; ?>">
+                        <br>
+                        <label class="form-label"> Precio unitario</label>
+                        <input name="precio_unitario" type="number" required class="form-control" value="<?php echo $precio_unitario; ?>">
+                        <br>
+                        <label class="form-label"> Fecha adquisicion</label>
+                        <input name="fecha_adquisicion" type="datetime-local" required class="form-control" value="<?php echo date('Y-m-d\TH:i', strtotime($fecha_adquisicion)); ?>">
+                        <br>
+                        <a href="home.php" title="Volver" style="background-color: #34495E;" class="btn btn"><i class="fa-solid fa-share fa-rotate-180" style="color: #f7f7f7;"></i></a>
+                        <button type="submit" title="Guardar" style="background-color: #34495E;" class="btn btn"><i class="fa-solid fa-floppy-disk" style="color: #f7f7f7;"></i></s></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </b>
 </html>

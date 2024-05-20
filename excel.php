@@ -25,10 +25,6 @@ if (!empty($_POST['buscar'])) {
 $stmt->execute();
 $result = $stmt->get_result();
 
-
-
-
-
 while($fila=$row =  $result->fetch_assoc()){
 echo "        #                  Nombre                  Descripcion                      Cantidad Disponible                        Precio Unitario                           Fecha de Adquisicion
            $row[id]             $row[nombre]                 $row[descripcion]                                            $row[cantidad_disponible]                                                              $row[precio_unitario]                                                $row[fecha_adquisicion]        
