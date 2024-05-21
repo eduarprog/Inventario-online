@@ -25,3 +25,7 @@ Imagenes:
 ![image](https://github.com/eduarprog/Gestion-de-Inventario/assets/102840664/5d94492e-b978-4ec8-8eab-807780c2bba0)
 
 Mas funcioalidades en desarrollo... 👍 
+
+- Contacto:
+
+Si tienes alguna pregunta o sugerencia, no dudes en contactarme a través de mi correo electrónico: eduardoantoniosanchezbaez@gmail.com
