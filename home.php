@@ -14,7 +14,6 @@ if (!isset($_SESSION["usuario"])) {
     <script src="https://kit.fontawesome.com/f97fcd2c02.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <link rel=" shorcut icon" href="img/logob2.png">
     <title>Centro de registros - Inventory</title>
     <style>
         body {
@@ -58,6 +57,7 @@ if (!isset($_SESSION["usuario"])) {
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            overflow: auto;
         }
 
         .aaa {
@@ -145,7 +145,6 @@ if ($result_total) {
                 </form>
                 <li class="navbar-nav">
                     <a style="text-decoration: none;" href="logout.php" title="Salir"><i class="fa-solid fa-arrow-right-from-bracket" style="color: #e40c0c;"></i></a>
-
                 </li>
             </div>
     </div>
@@ -246,7 +245,7 @@ if ($result_total) {
         if ($pagina < $total_paginas) {
             echo "<a title='Siguiente' class='aa' style='margin-left: 10px' href='home.php?pagina=" . ($pagina + 1) . "'>" . '<i class="fa-solid fa-chevron-up fa-rotate-90 fa-lx" style="color: #CA0403;"></i>' . "</a>";
         }
-        echo "<br><br><hr><br> &copy; 2024 - <b>Ferreteria Jotta-R</b> - Todos los derechos reservado";
+        echo "<br><br><hr><br> &copy; 2024 - Todos los derechos reservados";
 
         // Cerrar la declaración y la conexión
         if ($stmt) {

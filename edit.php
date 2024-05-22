@@ -69,6 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <title>Editar registro - Inventory</title>
     <link rel=" shorcut icon" href="img/logob2.png">
+    <link rel="stylesheet" href="style.css">
     <style>
         body {
             zoom: 85%;
