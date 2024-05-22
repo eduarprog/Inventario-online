@@ -156,7 +156,6 @@ if ($result_total) {
         <div class="content">
             <table class="table">
                 <thead>
-                    <!-- <a href="home.php"> <i class="fa-solid fa-rotate-right"></i></a> --->
                     Total de registros: <b> &nbsp; <?php echo $total_registros ?> </>
                         <tr>
                             <th scope="col">

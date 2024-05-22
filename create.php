@@ -1,4 +1,10 @@
 <?php
+session_start();
+if (!isset($_SESSION["usuario"])) {
+    header("Location: login.php");
+    exit();
+}
+
 require 'conection.php';
 $conection = conection();
 
@@ -35,26 +41,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <title>Agregar nuevo - Inventory</title>
     <link rel=" shorcut icon" href="img/logob2.png">
-    <link rel="stylesheet" href="style.css">
     <style>
         body {
             zoom: 85%;
+            background-color: #D6DBDF;
         }
     </style>
 </head>
-<b>
-    <br><br><br><br><br><br><br><br><br><br>
+<body>
+    <br><br>
     <div class="container">
-        <div class="content">
-            <div class="card" style="max-width: 18rem; text-align: center; ">
-                <div class="card-body">
                     <i class="fa-solid fa-layer-group fa-2x"></i>
                     <br><br>
                     <form method="post">
-                        <label class="form-label"> Nombre</label>
+                        <label class="form-label"> <b>Nombre</b></label>
                         <input name="nombre" required class="form-control" value="<?php echo $nombre; ?>">
                         <br>
-                        <label class="form-label">Categoría</label>
+                        <label class="form-label"><b>Categoría</b></label>
                         <select required class="form-select" name="descripcion">
                             <option value="" <?php echo isset($descripcion) && $descripcion == '' ? 'selected' : ''; ?>Categorias</option>
                             <option value="Hogar" <?php echo isset($descripcion) && $descripcion == 'Hogar' ? 'selected' : ''; ?>>Hogar</option>
@@ -65,14 +68,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <option value="Bombillos" <?php echo isset($descripcion) && $descripcion == 'Bombillos' ? 'selected' : ''; ?>>Bombillos</option>
                         </select>
                         <br>
-                        <label class="form-label"> Cantidad Disponible</label>
+                        <label class="form-label"><b>Cantidad Disponible</b></label>
                         <input name="cantidad_disponible" type="number" required class="form-control" value="<?php echo $cantidad_disponible; ?>">
                         <br>
-                        <label class="form-label"> Precio Unitario</label>
+                        <label class="form-label"> <b>Precio Unitario</b></label>
                         <input name="precio_unitario" type="number" required class="form-control" value="<?php echo $precio_unitario; ?>">
                         <br>
-                        <label class="form-label"> Fecha de Llegada</label>
-                        <input name="fecha_adquisicion" type="datetime-local" required class="form-control" value="<?php echo $fecha_adquisicion; ?>">
+                        <label class="form-label"><b>Fecha de Llegada</b></label>
+                        <input name="fecha_adquisicion" type="date" required class="form-control" value="<?php echo $fecha_adquisicion; ?>">
                         <br>
                         <a href="home.php" title="Volver" style="background-color: #34495E;" class="btn btn"><i class="fa-solid fa-share fa-rotate-180" style="color: #f7f7f7;"></i></a>
                         <button type="submit" title="Guardar" style="background-color: #34495E;" class="btn btn"><i class="fa-solid fa-floppy-disk" style="color: #f7f7f7;"></i></s></button>
@@ -81,5 +84,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
         </div>
     </div>
-</b>
+</body>
 </html>
