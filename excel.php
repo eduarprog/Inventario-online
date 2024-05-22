@@ -5,7 +5,7 @@ header("Content-Disposition: attachment; filename= archivo.xls");
 
 require 'conection.php';
 $conection = conection();
-$por_pagina = 10;
+$por_pagina = 1000;
 
 $pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 1;
 $empieza = ($pagina - 1) * $por_pagina;
